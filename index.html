@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f2ee">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="description" content="Diário pessoal de glicose, alimentação e hidratação.">
+  <title>Glucometer — seu diário de cuidado</title>
+  <link rel="icon" type="image/svg+xml" href="logo.svg">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="app-icon-192.png">
+  <link rel="stylesheet" href="styles.css?v=16">
+  <script type="module" src="src/app.mjs?v=12"></script>
+</head>
+<body>
+  <svg class="icon-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3.2S5.5 10.1 5.5 14.6a6.5 6.5 0 0 0 13 0C18.5 10.1 12 3.2 12 3.2Z"/><path d="M9 15.5a3.2 3.2 0 0 0 3.2 3.2"/></symbol>
+    <symbol id="i-water-glass" viewBox="0 0 24 24"><path d="M5 4h14l-1.4 16H6.4L5 4Z"/><path d="M6 11c1.5-1.1 3-1.1 4.5 0s3 1.1 4.5 0 2.3-.9 3.3-.3"/><path d="M9 7.5h.01"/></symbol>
+    <symbol id="i-water-bottle" viewBox="0 0 24 24"><path d="M9 3h6v3l2 2v11.5a1.5 1.5 0 0 1-1.5 1.5h-7A1.5 1.5 0 0 1 7 19.5V8l2-2V3Z"/><path d="M9 3h6M7.5 10.5h9M10 6h4"/><path d="M9.5 14.5c1.5-1 3.5-1 5 0"/></symbol>
+    <symbol id="i-water-waves" viewBox="0 0 24 24"><path d="M3 8.5c2-1.7 4-1.7 6 0s4 1.7 6 0 4-1.7 6 0"/><path d="M3 13c2-1.7 4-1.7 6 0s4 1.7 6 0 4-1.7 6 0"/><path d="M3 17.5c2-1.7 4-1.7 6 0s4 1.7 6 0 4-1.7 6 0"/></symbol>
+    <symbol id="i-water-drops" viewBox="0 0 24 24"><path d="M8 4S4 8.7 4 11.5a4 4 0 0 0 8 0C12 8.7 8 4 8 4Z"/><path d="M16.5 7S13 11 13 13.5a3.5 3.5 0 0 0 7 0C20 11 16.5 7 16.5 7Z"/><path d="M6.5 12a1.7 1.7 0 0 0 1.7 1.7"/></symbol>
+    <symbol id="i-utensils" viewBox="0 0 24 24"><path d="M4 3v7a3 3 0 0 0 6 0V3M7 3v18M17 3v18M17 3c-2 2-3 5-3 8h6V3Z"/></symbol>
+    <symbol id="i-volume" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15 9a4 4 0 0 1 0 6m3-9a8 8 0 0 1 0 12"/></symbol>
+    <symbol id="i-pulse" viewBox="0 0 24 24"><path d="M3 12h4l2.1-6 4 12 2.2-6H21"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9" r="1.5"/><path d="m21 15-5-5L5 19"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="m4 16.5-.8 4.3 4.3-.8L19 8.5a2.8 2.8 0 0 0-4-4L4 16.5Z"/><path d="m13.5 6.5 4 4"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16m-10 4v6m4-6v6M6 7l1 14h10l1-14M9 7V4h6v3"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"/><path d="m19 16 .9 2.1L22 19l-2.1.9L19 22l-.9-2.1L16 19l2.1-.9L19 16Z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 20 6v5c0 5-3.3 8.5-8 10-4.7-1.5-8-5-8-10V6l8-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+  </svg>
+
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navegação principal">
+      <a class="brand" href="#dashboard" aria-label="Glucometer, início" data-nav="dashboard">
+        <span class="brand-mark" aria-hidden="true"><svg><use href="#i-drop"/></svg></span>
+        <span class="brand-copy"><strong>gluco<span>meter</span></strong><small>seu diário de cuidado</small></span>
+      </a>
+      <div class="side-label">Seu espaço</div>
+      <nav class="side-nav">
+        <button class="nav-link is-active" type="button" data-nav="dashboard" aria-current="page"><svg><use href="#i-grid"/></svg><span>Dashboard</span><span class="nav-current" aria-hidden="true"></span></button>
+        <button class="nav-link" type="button" data-nav="today"><svg><use href="#i-clock"/></svg><span>Hoje</span></button>
+        <button class="nav-link" type="button" data-nav="glucose"><svg><use href="#i-pulse"/></svg><span>Glicose</span></button>
+        <button class="nav-link" type="button" data-nav="water"><svg><use href="#i-drop"/></svg><span>Água</span></button>
+        <button class="nav-link" type="button" data-nav="data"><svg><use href="#i-shield"/></svg><span>Dados e instalação</span></button>
+      </nav>
+      <div class="sidebar-spacer"></div>
+      <div class="sidebar-note">
+        <svg><use href="#i-shield"/></svg>
+        <p>Seus registros ficam<br><strong>sob seu controle.</strong></p>
+      </div>
+      <div class="sidebar-bottom"><span class="status-dot"></span> Um passo de cada vez</div>
+    </aside>
+
+    <div class="mobile-header">
+      <a class="brand" href="#dashboard" data-nav="dashboard"><span class="brand-mark"><svg><use href="#i-drop"/></svg></span><span class="brand-copy"><strong>gluco<span>meter</span></strong></span></a>
+          <button class="mobile-export" type="button" id="export-data-mobile" aria-label="Exportar relatório PDF"><svg><use href="#i-download"/></svg></button>
+    </div>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="breadcrumb"><span>Meu espaço</span><span class="crumb-dot">/</span><strong id="page-crumb">Dashboard</strong></div>
+        <div class="topbar-actions">
+          <span class="today-label" id="today-label"></span>
+          <button class="icon-button" type="button" id="export-data" aria-label="Exportar relatório PDF" title="Exportar relatório PDF"><svg><use href="#i-download"/></svg></button>
+        </div>
+      </header>
+
+      <section class="view is-visible" id="view-dashboard" aria-labelledby="dashboard-title">
+        <div class="page-heading dashboard-heading">
+          <div><p class="eyebrow">Seu check-in de hoje</p><h1 id="dashboard-title">Um passo de cada vez.</h1><p class="page-subtitle">Anote glicose e água em poucos toques — sem cobrança, só continuidade.</p></div>
+          <div class="heading-actions"><button class="button button-soft" type="button" data-open-form="glucose"><svg><use href="#i-pulse"/></svg><span>Registrar glicose</span></button><button class="button button-primary" type="button" data-open-form="water"><svg><use href="#i-drop"/></svg><span>Registrar água</span></button></div>
+        </div>
+
+        <section class="daily-checkin" aria-labelledby="daily-checkin-title">
+          <div class="daily-checkin-copy"><span class="checkin-bubble" aria-hidden="true">✦</span><div><h2 id="daily-checkin-title">Seu ritual de cuidado</h2><p id="checkin-message">Duas anotações rápidas deixam seu dia visível.</p></div></div>
+          <div class="checkin-progress" aria-label="Progresso do check-in de hoje"><strong id="checkin-count">0 de 2</strong><span class="progress-track"><span id="checkin-progress-bar"></span></span><small id="checkin-percent">0%</small></div>
+          <div class="checkin-items">
+            <div class="checkin-item checkin-glucose"><span class="checkin-icon"><svg><use href="#i-pulse"/></svg></span><span><strong>Glicose</strong><small id="checkin-glucose-status">Ainda falta anotar</small></span></div>
+            <div class="checkin-item checkin-water"><span class="checkin-icon"><svg><use href="#i-drop"/></svg></span><span><strong>Água</strong><small id="checkin-water-status">Ainda falta anotar</small></span></div>
+          </div>
+        </section>
+
+        <div class="dashboard-controls"><label for="period-select">Período</label><select id="period-select" class="select-control"><option value="today">Hoje</option><option value="7d" selected>Últimos 7 dias</option><option value="30d">Últimos 30 dias</option><option value="all">Todo o histórico</option></select><span class="period-hint" id="period-hint">Inclui os dias sem registros</span></div>
+
+        <div class="summary-grid">
+          <article class="summary-card glucose-card">
+            <div class="summary-card-top"><span class="summary-icon glucose-icon"><svg><use href="#i-pulse"/></svg></span><span class="card-overline">Média de glicose</span></div>
+            <div class="metric-value" id="glucose-average">—</div><div class="metric-caption" id="glucose-average-caption">Sem registros no período</div>
+            <div class="summary-foot"><span id="glucose-entry-count">0 medições</span><span class="unit-indicator">por unidade</span></div>
+          </article>
+          <article class="summary-card water-card">
+            <div class="summary-card-top"><span class="summary-icon water-icon"><svg><use href="#i-drop"/></svg></span><span class="card-overline">Volume de água</span></div>
+            <div class="metric-value" id="water-total">—</div><div class="metric-caption" id="water-total-caption">Sem registros no período</div>
+            <div class="summary-foot"><span id="water-entry-count">0 registros</span><span class="unit-indicator" id="water-average">— / dia</span></div>
+          </article>
+          <article class="summary-card last-water-card">
+            <div class="summary-card-top"><span class="summary-icon time-icon"><svg><use href="#i-clock"/></svg></span><span class="card-overline">Último registro de água</span></div>
+            <div class="metric-value last-water-value" id="last-water-volume">—</div><div class="metric-caption" id="last-water-time">Ainda sem registro</div>
+            <div class="summary-foot"><span id="last-water-date"></span><button class="text-action" type="button" data-open-form="water">Anotar agora <svg><use href="#i-arrow"/></svg></button></div>
+          </article>
+        </div>
+
+        <div class="dashboard-columns">
+          <section class="panel recent-panel" aria-labelledby="recent-title">
+            <div class="panel-heading"><div><h2 id="recent-title">Medições recentes</h2><p>As últimas 10 que você registrou</p></div><button class="text-action" type="button" data-nav="glucose">Ver glicose <svg><use href="#i-arrow"/></svg></button></div>
+            <div class="recent-list" id="dashboard-glucose-list"></div>
+          </section>
+          <section class="panel rhythm-panel" aria-labelledby="rhythm-title">
+            <div class="panel-heading"><div><h2 id="rhythm-title">Seu ritmo de água</h2><p id="rhythm-subtitle">Registros no período escolhido</p></div><span class="panel-illustration" aria-hidden="true"><svg><use href="#i-drop"/></svg></span></div>
+            <div class="water-visual-row"><div class="water-total-large" id="water-period-total">—</div><span class="water-unit">ml <span>no período</span></span></div>
+            <div class="meter-caption"><span id="water-period-count">Sem registros ainda</span><button class="text-action" type="button" data-nav="water">Abrir histórico <svg><use href="#i-arrow"/></svg></button></div>
+            <div class="reminder-mini"><span class="reminder-symbol"><svg><use href="#i-bell"/></svg></span><div><strong id="reminder-summary">Lembretes pausados</strong><small id="reminder-subsummary">Ative se fizer sentido para você</small></div><button class="mini-toggle" type="button" id="reminder-toggle-dashboard" aria-label="Ativar lembretes"><span></span></button></div>
+          </section>
+        </div>
+        <p class="medical-note"><svg><use href="#i-shield"/></svg> Este app é um diário pessoal e não substitui orientação profissional.</p>
+      </section>
+
+      <section class="view" id="view-today" aria-labelledby="today-title" hidden>
+        <div class="page-heading section-heading"><div><p class="eyebrow">Diário capilar</p><h1 id="today-title">Automonitorização de hoje</h1><p class="page-subtitle" id="today-date-heading"></p></div><div class="heading-actions"><button class="button button-soft" type="button" data-open-form="glucose"><svg><use href="#i-pulse"/></svg> Registrar glicose</button><button class="button button-primary" type="button" data-open-form="water"><svg><use href="#i-drop"/></svg> Registrar água</button><button class="button button-quiet" type="button" id="export-monitoring"><svg><use href="#i-download"/></svg> Exportar PDF completo</button><button class="button button-quiet" type="button" id="export-json"><svg><use href="#i-download"/></svg> Backup JSON</button></div></div>
+        <section class="daily-summary" aria-label="Resumo de hoje"><div><strong id="monitoring-glucose-count">0</strong><span>medições de glicemia</span></div><div><strong id="monitoring-insulin-count">0</strong><span>entradas com insulina</span></div><div><strong id="monitoring-meal-count">0</strong><span>entradas com alimentação</span></div></section>
+        <section class="panel timeline-panel" aria-labelledby="timeline-title"><div class="panel-heading timeline-heading"><div><h2 id="timeline-title">Linha do tempo do dia</h2><p>Glicose, alimentação e água organizadas por horário.</p></div><div class="timeline-heading-actions"><label for="timeline-date">Dia <input id="timeline-date" type="date"></label><span class="history-count" id="timeline-count">0 eventos</span></div></div><div id="daily-timeline" class="daily-timeline"></div></section>
+        <div class="form-panel monitoring-form-panel" id="monitoring-form-panel" hidden><div class="form-panel-heading"><div><span class="form-index glucose-index">G</span><div><h2 id="monitoring-form-title">Editar registro</h2><p id="monitoring-form-description">Glicemia é opcional. Registre alimentação e insulina no mesmo registro quando precisar.</p></div></div><button type="button" class="close-form" id="close-monitoring-form" aria-label="Fechar formulário">×</button></div>
+          <form id="monitoring-form" novalidate><input type="hidden" id="monitoring-id"><input type="hidden" id="monitoring-mode" value="monitoring"><div class="form-grid">
+            <fieldset class="monitoring-group" id="monitoring-glucose-group"><legend>Glicemia</legend><label class="field"><span>Glicemia <em>opcional</em></span><div class="input-unit"><input id="monitoring-glucose-value" type="number" min="0" step="any" inputmode="decimal" placeholder="Vazio ou 0 se não mediu"><select id="monitoring-glucose-unit" aria-label="Unidade da glicemia"><option>mg/dL</option><option>mmol/L</option></select></div><small class="field-error" id="monitoring-glucose-error"></small></label></fieldset>
+            <label class="field" id="monitoring-moment-field"><span>Momento da refeição ou medição</span><select id="monitoring-moment"><option value="">Selecione o momento (opcional)</option><option>Ao acordar / em jejum (antes de comer)</option><optgroup label="Café da manhã"><option>Antes do café da manhã</option><option>No café da manhã</option><option>Após o café da manhã</option></optgroup><optgroup label="Lanche da manhã"><option>Antes do lanche da manhã</option><option>No lanche da manhã</option><option>Após o lanche da manhã</option></optgroup><optgroup label="Almoço"><option>Antes do almoço</option><option>No almoço</option><option>Após o almoço</option></optgroup><optgroup label="Lanche da tarde"><option>Antes do lanche da tarde</option><option>No lanche da tarde</option><option>Após o lanche da tarde</option></optgroup><optgroup label="Jantar"><option>Antes do jantar</option><option>No jantar</option><option>Após o jantar</option></optgroup><optgroup label="Ceia"><option>Antes da ceia</option><option>Na ceia</option><option>Após a ceia</option></optgroup><option>Antes de dormir</option><option>Durante a madrugada</option><option>Outro momento</option><optgroup label="Momentos antigos (registros existentes)"><option>Ao acordar</option><option>Ao deitar</option><option>Antes do lanche</option><option>Após o lanche</option></optgroup></select></label>
+            <label class="field" id="custom-moment-field" hidden><span>Descreva o momento <em>opcional</em></span><input id="monitoring-custom-moment" maxlength="120" placeholder="Ex.: lanche fora de horário"></label>
+            <label class="field" id="monitoring-time-field"><span>Horário de hoje</span><input id="monitoring-time" type="time" required><small class="field-error" id="monitoring-time-error"></small></label>
+            <fieldset class="monitoring-group" id="monitoring-insulin-group"><legend>Insulina</legend><label class="field" id="monitoring-insulin-status-field"><span>Administrou insulina?</span><select id="monitoring-insulin-status"><option value="unknown">Não informado</option><option value="yes">Sim</option><option value="no">Não</option></select></label><div id="insulin-details" hidden><label class="field"><span>Dose em unidades</span><input id="monitoring-insulin-dose" type="number" min="0.01" step="any" inputmode="decimal" placeholder="Ex.: 2,5"><small class="field-error" id="monitoring-insulin-error"></small></label><label class="field"><span>Tipo/nome <em>opcional</em></span><input id="monitoring-insulin-type" maxlength="120" placeholder="Ex.: rápida"></label></div></fieldset>
+            <fieldset class="monitoring-group"><legend>Alimentação</legend><label class="field" id="monitoring-meal-status-field"><span>Alimentou-se?</span><select id="monitoring-meal-status"><option value="unknown">Não informado</option><option value="yes">Sim</option><option value="no">Não</option></select></label><label class="field" id="food-field" hidden><span>O que comeu? <em>opcional</em></span><textarea id="monitoring-food" rows="3" maxlength="500" placeholder="Ex.: arroz, feijão, frango e salada"></textarea></label></fieldset>
+            <label class="field field-wide"><span>Observações <em>opcional</em></span><textarea id="monitoring-note" rows="2" maxlength="500" placeholder="Um contexto que queira lembrar"></textarea></label>
+          </div><div class="form-actions"><button class="button button-quiet" type="button" id="cancel-monitoring-form">Cancelar</button><button class="button button-primary" type="submit"><svg><use href="#i-plus"/></svg> Salvar anotação</button></div></form></div>
+        <section class="panel history-panel monitoring-history" aria-labelledby="monitoring-history-title"><div class="panel-heading history-heading"><div><h2 id="monitoring-history-title">Registros de hoje</h2><p>Em ordem cronológica; registros anteriores continuam preservados.</p></div><span class="history-count" id="monitoring-history-count">0 registros</span></div><div class="monitoring-table-wrap"><table class="monitoring-table"><thead><tr><th>Horário</th><th>Momento do dia</th><th>Glicemia</th><th>Insulina</th><th>Alimentação</th><th>Observações</th><th><span class="sr-only">Ações</span></th></tr></thead><tbody id="monitoring-list"></tbody></table></div><div id="monitoring-empty"></div></section>
+        <p class="medical-note"><svg><use href="#i-shield"/></svg> O resultado da fórmula é apenas matemático e não informa se você deve aplicar insulina. Use somente uma fórmula confirmada especificamente para você pela sua equipe de saúde.</p>
+      </section>
+      <section class="view" id="view-glucose" aria-labelledby="glucose-title" hidden>
+        <div class="page-heading section-heading"><div><h1 id="glucose-title">Seu diário de glicose</h1><p class="page-subtitle">Registre glicose ou anote alimentação e insulina sem uma medição.</p></div><button class="button button-primary" type="button" id="show-glucose-form"><svg><use href="#i-plus"/></svg> Registrar glicose</button></div>
+        <div class="form-panel" id="glucose-form-panel" hidden>
+          <div class="form-panel-heading"><div><span class="form-index glucose-index">G</span><div><h2 id="glucose-form-title">Registrar glicose</h2><p>O valor é opcional: você também pode registrar só alimentação e insulina.</p></div></div><button type="button" class="close-form" data-cancel-form="glucose" aria-label="Fechar formulário">×</button></div>
+          <form id="glucose-form" novalidate>
+            <input type="hidden" id="glucose-id">
+            <div class="form-grid">
+              <label class="field"><span>Glicemia <em>opcional</em></span><div class="input-unit"><input id="glucose-value" type="number" min="0" step="any" inputmode="decimal" placeholder="Vazio ou 0 se não mediu"><select id="glucose-unit" aria-label="Unidade"><option value="mg/dL">mg/dL</option><option value="mmol/L">mmol/L</option></select></div><small class="field-error" id="glucose-value-error"></small><small class="field-hint">Se não mediu, deixe vazio ou digite 0. Você ainda pode registrar alimentação e insulina; o relatório mostrará ?.</small></label>
+              <section class="dose-calculator field-wide" aria-labelledby="dose-calculator-title" aria-live="polite"><div class="dose-calculator-heading"><svg aria-hidden="true"><use href="#i-pulse"/></svg><h3 id="dose-calculator-title">Resultado matemático da fórmula informada</h3></div><p class="dose-formula" id="insulin-formula-result">Informe uma glicemia em mg/dL para calcular.</p><p class="dose-calculator-note">Fórmula matemática configurada: (glicemia − 100) ÷ 40, arredondando para o inteiro mais próximo (frações de 0,5 arredondam para cima) e sem valores negativos.</p><p class="dose-safety-warning"><strong>Importante:</strong> este é apenas o resultado da conta, não uma recomendação para aplicar insulina. Use essa fórmula somente se ela foi confirmada especificamente para você pela sua equipe de saúde. O resultado matemático não determina uma dose segura; siga apenas o plano confirmado pela sua equipe de saúde. O resultado não preenche automaticamente o campo de dose.</p></section>
+              <label class="field"><span>Data e hora</span><input id="glucose-date" type="datetime-local" required><small class="field-error" id="glucose-date-error"></small></label>
+              <label class="field"><span>Momento da medição <em>opcional</em></span><select id="glucose-moment"><option value="">Selecione o momento (opcional)</option><option>Ao acordar / em jejum (antes de comer)</option><optgroup label="Café da manhã"><option>Antes do café da manhã</option><option>No café da manhã</option><option>Após o café da manhã</option></optgroup><optgroup label="Lanche da manhã"><option>Antes do lanche da manhã</option><option>No lanche da manhã</option><option>Após o lanche da manhã</option></optgroup><optgroup label="Almoço"><option>Antes do almoço</option><option>No almoço</option><option>Após o almoço</option></optgroup><optgroup label="Lanche da tarde"><option>Antes do lanche da tarde</option><option>No lanche da tarde</option><option>Após o lanche da tarde</option></optgroup><optgroup label="Jantar"><option>Antes do jantar</option><option>No jantar</option><option>Após o jantar</option></optgroup><optgroup label="Ceia"><option>Antes da ceia</option><option>Na ceia</option><option>Após a ceia</option></optgroup><option>Antes de dormir</option><option>Durante a madrugada</option><option>Outro momento</option><optgroup label="Momentos antigos (registros existentes)"><option>Ao acordar</option><option>Ao deitar</option><option>Antes do lanche</option><option>Após o lanche</option></optgroup></select></label>
+              <fieldset class="glucose-context-group"><legend>Insulina</legend><label class="field"><span>Você tomou insulina?</span><select id="glucose-insulin-status"><option value="unknown">Não informado</option><option value="yes">Sim</option><option value="no">Não</option></select></label><div id="glucose-insulin-details" hidden><label class="field"><span>Dose em unidades</span><input id="glucose-insulin-dose" type="number" min="0.01" step="any" inputmode="decimal" placeholder="Ex.: 2,5"><small class="field-error" id="glucose-insulin-error"></small></label><label class="field"><span>Tipo/nome <em>opcional</em></span><input id="glucose-insulin-type" maxlength="120" placeholder="Ex.: rápida"></label></div></fieldset>
+              <fieldset class="glucose-context-group"><legend>Alimentação</legend><label class="field"><span>Você comeu?</span><select id="glucose-meal-status"><option value="unknown">Não informado</option><option value="yes">Sim</option><option value="no">Não</option></select></label><label class="field" id="glucose-food-field" hidden><span>O que você comeu? <em>opcional</em></span><textarea id="glucose-food" rows="2" maxlength="500" placeholder="Ex.: arroz, feijão e frango"></textarea></label></fieldset>
+              <label class="field field-wide"><span>Observação <em>opcional</em></span><textarea id="glucose-note" rows="2" maxlength="300" placeholder="Um contexto que queira lembrar"></textarea></label>
+            </div>
+            <div class="form-actions"><button class="button button-quiet" type="button" data-cancel-form="glucose">Cancelar</button><button class="button button-primary" type="submit" id="glucose-save"><svg><use href="#i-plus"/></svg> Salvar registro</button></div>
+          </form>
+        </div>
+        <section class="panel comparison-panel" aria-labelledby="comparison-title"><div class="panel-heading"><div><h2 id="comparison-title">Comparar momentos semelhantes</h2><p>Veja como seus registros variam entre dias; o gráfico não interpreta nem diagnostica.</p></div></div><div class="comparison-controls"><label class="field"><span>Momento</span><select id="comparison-moment"><option>Antes do café da manhã</option><option>No café da manhã</option><option>Após o café da manhã</option><option>Antes do almoço</option><option>No almoço</option><option>Após o almoço</option><option>Antes do jantar</option><option>No jantar</option><option>Após o jantar</option><option>Antes da ceia</option><option>Na ceia</option><option>Após a ceia</option><option>Ao acordar / em jejum (antes de comer)</option></select></label><label class="field"><span>Unidade</span><select id="comparison-unit"><option>mg/dL</option><option>mmol/L</option></select></label><label class="field"><span>Período</span><select id="comparison-days"><option value="7">7 dias</option><option value="14" selected>14 dias</option><option value="30">30 dias</option></select></label></div><div id="comparison-chart" class="comparison-chart" role="img" aria-label="Comparação dos registros de glicose pelo momento escolhido"></div><p id="comparison-summary" class="comparison-summary">Selecione um momento para consultar os registros.</p></section>
+        <section class="panel history-panel" aria-labelledby="glucose-history-title"><div class="panel-heading history-heading"><div><h2 id="glucose-history-title">Histórico</h2><p id="glucose-history-caption">Todas as suas medições, da mais recente para a mais antiga</p></div><span class="history-count" id="glucose-history-count">0 medições</span></div><div class="history-list" id="glucose-history-list"></div></section>
+        <p class="medical-note"><svg><use href="#i-shield"/></svg> O Glucometer organiza os valores informados. A fórmula exibida é apenas um cálculo matemático, não uma recomendação de tratamento.</p>
+      </section>
+
+      <section class="view" id="view-data" aria-labelledby="data-title" hidden>
+        <div class="page-heading section-heading"><div><p class="eyebrow">Privacidade e continuidade</p><h1 id="data-title">Dados e instalação</h1><p class="page-subtitle">Seu diário pessoal, sem cadastro, login, e-mail ou senha.</p></div></div>
+        <section class="panel data-setup-panel"><div class="panel-heading"><div><h2>Instalar como aplicativo</h2><p>Adicione o Glucometer à tela inicial para abrir em uma janela própria, como um aplicativo.</p></div><button type="button" class="button button-primary" id="pwa-install" hidden>Instalar Glucometer</button></div><p class="pwa-install-help" id="pwa-install-help">Se o botão de instalação não aparecer, abra o menu do navegador e escolha “Instalar aplicativo” ou “Adicionar à tela inicial”, quando disponível.</p></section>
+        <section class="panel privacy-card"><span class="privacy-mark"><svg><use href="#i-shield"/></svg></span><div><strong>Os registros ficam neste navegador</strong><p>O site não exige conta e não envia seus registros de glicose, alimentação ou água para sincronização. Antes de cada alteração, o app tenta manter cópias locais anteriores. Ainda assim, baixe backups JSON regularmente e guarde-os fora do navegador.</p><div class="form-actions"><button type="button" class="button button-primary" id="data-export-json"><svg><use href="#i-download"/></svg> Baixar backup JSON</button><button type="button" class="button button-quiet" id="data-export-pdf">Exportar relatório PDF</button></div></div></section>
+        <section class="panel recovery-panel" aria-labelledby="data-recovery-title"><div class="panel-heading"><div><h2 id="data-recovery-title">Recuperar anotações</h2><p>Importe um backup JSON do Glucometer ou o arquivo de resgate gerado pelo console. A importação mescla registros por ID e não apaga o diário atual.</p></div></div><p id="data-recovery-status" aria-live="polite">Conferindo registros e cópias locais…</p><div class="recovery-actions"><label class="button button-primary recovery-file-button" for="data-import-file"><svg><use href="#i-download"/></svg> Importar backup ou arquivo de resgate</label><input id="data-import-file" class="visually-hidden-input" type="file" accept="application/json,.json"><button type="button" class="button button-quiet" id="data-restore-local" hidden>Recuperar cópia anterior</button></div><small id="data-import-status" aria-live="polite">Nenhum dado será substituído silenciosamente. O app pedirá confirmação antes de mesclar os registros.</small></section>
+      </section>
+      <section class="export-panel" id="export-panel" hidden aria-labelledby="export-panel-title"><div class="export-panel-inner"><div class="panel-heading"><div><h2 id="export-panel-title">Personalizar exportação PDF</h2><p>O quadro principal segue o formulário de automonitorização: uma linha por dia, colunas por refeição e dose de insulina em campo próprio. Alimentação e água são seções opcionais.</p></div><button type="button" class="close-form" id="export-close" aria-label="Fechar exportação">×</button></div><div class="export-options-grid"><label class="field"><span>De (opcional)</span><input id="export-from" type="date"></label><label class="field"><span>Até (opcional)</span><input id="export-to" type="date"></label></div><fieldset class="export-types"><legend>Incluir no relatório</legend><label><input id="export-include-glucose" type="checkbox" checked> Glicemia e unidades de insulina tomadas</label><label><input id="export-include-food" type="checkbox"> Alimentação em seção separada</label><label><input id="export-include-water" type="checkbox"> Resumo de água em seção separada</label></fieldset><div class="form-actions"><button class="button button-quiet" type="button" id="export-cancel">Cancelar</button><button class="button button-primary" type="button" id="export-pdf-generate">Baixar PDF</button></div></div></section>
+      <section class="view" id="view-water" aria-labelledby="water-title" hidden>
+        <div class="page-heading section-heading"><div><h1 id="water-title">Seu diário de água</h1><p class="page-subtitle">Anote cada gole do seu jeito, sem cobrança.</p></div><span class="today-water-total"><svg><use href="#i-water-drops"/></svg><span><strong id="water-today-value">0 ml</strong><small>registrados hoje</small></span></span></div>
+        <div class="water-layout">
+          <div class="water-main-column">
+            <div class="form-panel water-entry-panel">
+              <div class="form-panel-heading"><div><span class="form-index water-index"><svg><use href="#i-drop"/></svg></span><div><h2 id="water-form-title">Registrar água</h2><p>Escolha um atalho ou informe outro volume.</p></div></div></div>
+              <form id="water-form" novalidate>
+                <input type="hidden" id="water-id">
+                <fieldset class="quick-volume-field"><legend>Um toque para preencher</legend><div class="quick-volume-list"><button type="button" data-ml="150"><svg aria-hidden="true" focusable="false"><use href="#i-drop"/></svg><span>150 <small>ml</small></span></button><button type="button" data-ml="250"><svg aria-hidden="true" focusable="false"><use href="#i-water-glass"/></svg><span>250 <small>ml</small></span></button><button type="button" data-ml="350"><svg aria-hidden="true" focusable="false"><use href="#i-water-bottle"/></svg><span>350 <small>ml</small></span></button><button type="button" data-ml="500"><svg aria-hidden="true" focusable="false"><use href="#i-water-waves"/></svg><span>500 <small>ml</small></span></button></div></fieldset>
+                <div class="form-grid water-form-grid"><label class="field"><span>Volume</span><div class="input-unit"><input id="water-volume" type="number" min="1" max="10000" step="1" inputmode="numeric" placeholder="Ex.: 250" required><span class="input-suffix">ml</span></div><small class="field-error" id="water-volume-error"></small></label><label class="field"><span>Data e hora</span><input id="water-date" type="datetime-local" required><small class="field-error" id="water-date-error"></small></label></div>
+                <div class="form-actions water-form-actions"><button class="button button-quiet" type="button" id="water-cancel-edit" hidden>Cancelar edição</button><button class="button button-primary" type="submit" id="water-save"><svg><use href="#i-plus"/></svg> Salvar registro</button></div>
+              </form>
+            </div>
+
+            <section class="panel history-panel" aria-labelledby="water-history-title"><div class="panel-heading history-heading"><div><h2 id="water-history-title">Seu histórico</h2><p>Os registros ficam salvos neste navegador.</p></div><span class="history-count" id="water-history-count">0 registros</span></div><div class="history-list" id="water-history-list"></div></section>
+          </div>
+          <aside class="water-side-column">
+            <section class="reminder-panel" aria-labelledby="reminder-title"><div class="reminder-panel-head"><span class="reminder-icon"><svg><use href="#i-bell"/></svg></span><span class="optional-tag">SEU TEMPO</span></div><h2 id="reminder-title">Um lembrete gentil</h2><p>Se quiser, o navegador pode lembrar você de fazer uma pausa para beber água.</p><label class="field reminder-interval-field" for="reminder-interval"><span>Repetir a cada</span><select id="reminder-interval" class="select-control"><option value="15">15 minutos</option><option value="30">30 minutos</option><option value="45">45 minutos</option><option value="60">1 hora</option></select></label><div class="reminder-status-line"><span class="status-dot" id="reminder-status-dot"></span><span id="reminder-status-text">Desativado</span></div><div class="reminder-actions"><button type="button" class="button button-primary reminder-main-button" id="reminder-toggle-water"><svg><use href="#i-bell"/></svg><span>Ativar lembretes</span></button><button type="button" class="button button-quiet" id="reminder-pause" hidden>Pausar</button></div><button type="button" class="button button-quiet reminder-test-button" id="reminder-test-sound"><svg><use href="#i-volume"/></svg> Testar som do lembrete</button>
+              <div class="push-background-panel">
+                <label class="field push-token-field" for="push-setup-token"><span>Código privado para ativar em segundo plano</span><input id="push-setup-token" type="password" autocomplete="off" spellcheck="false" placeholder="Código configurado na Vercel" aria-describedby="push-background-status"></label>
+                <button type="button" class="button button-primary push-background-button" id="push-background-toggle">Ativar notificações em segundo plano</button>
+                <small class="reminder-disclaimer" id="push-background-status" aria-live="polite">Notificações com navegador fechado precisam de configuração do servidor. Não há cadastro nem login.</small>
+              </div>
+              <small class="reminder-disclaimer">Com a página aberta, o lembrete pode tocar o áudio de água deste projeto. Com o navegador fechado, o alerta push usa o som de notificação do sistema; a web não pode reproduzir o MP3 personalizado em segundo plano. A entrega depende do navegador, do sistema operacional, da permissão e da conexão.</small></section>
+            <section class="privacy-card"><span class="privacy-mark"><svg><use href="#i-shield"/></svg></span><div><strong>Seus dados, no seu dispositivo</strong><p>Os registros ficam neste navegador. Exporte uma cópia pela opção no topo.</p></div></section>
+          </aside>
+        </div>
+      </section>
+      <footer class="app-footer"><span>Feito para acompanhar, não cobrar.</span><button type="button" class="footer-export" id="export-data-footer">Exportar relatório PDF <svg><use href="#i-arrow"/></svg></button></footer>
+    </main>
+  </div>
+
+  <nav class="mobile-nav" aria-label="Navegação">
+    <button class="mobile-nav-link is-active" type="button" data-nav="dashboard" aria-current="page"><svg><use href="#i-grid"/></svg><span>Início</span></button>
+    <button class="mobile-nav-link" type="button" data-nav="today"><svg><use href="#i-clock"/></svg><span>Hoje</span></button>
+    <button class="mobile-nav-link" type="button" data-nav="glucose"><svg><use href="#i-pulse"/></svg><span>Glicose</span></button>
+    <button class="mobile-nav-link" type="button" data-nav="water"><svg><use href="#i-drop"/></svg><span>Água</span></button>
+    <button class="mobile-nav-link" type="button" data-nav="data"><svg><use href="#i-shield"/></svg><span>Dados</span></button>
+  </nav>
+  <div class="toast-region" id="toast-region" role="status" aria-live="polite" aria-atomic="true"></div>
+</body>
+</html>

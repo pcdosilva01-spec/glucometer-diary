@@ -1,0 +1,13 @@
+# Saída gerada pelo build de produção
+/public-site/
+/dist/
+
+# Dependências e arquivos temporários locais
+/node_modules/
+*.log
+.DS_Store
+
+# Segredos locais (a exceção permite documentar variáveis de exemplo)
+.env
+.env.*
+!.env.example

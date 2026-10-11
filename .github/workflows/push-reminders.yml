@@ -1,0 +1,33 @@
+name: Enviar lembretes de água
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: glucometer-water-push
+  cancel-in-progress: false
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Verificar se há lembrete pendente e enviar push
+        env:
+          PUSH_DISPATCH_URL: ${{ secrets.PUSH_DISPATCH_URL }}
+          PUSH_CRON_SECRET: ${{ secrets.PUSH_CRON_SECRET }}
+        run: |
+          set -euo pipefail
+          test -n "$PUSH_DISPATCH_URL" || { echo 'Secret PUSH_DISPATCH_URL não configurado'; exit 1; }
+          test -n "$PUSH_CRON_SECRET" || { echo 'Secret PUSH_CRON_SECRET não configurado'; exit 1; }
+          curl --fail-with-body --silent --show-error \
+            --max-time 30 \
+            -X POST "$PUSH_DISPATCH_URL" \
+            -H "Authorization: Bearer $PUSH_CRON_SECRET" \
+            -H 'Content-Type: application/json' \
+            -d '{}'

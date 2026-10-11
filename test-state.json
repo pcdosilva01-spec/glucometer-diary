@@ -1,0 +1,173 @@
+{
+  "application": "Glucometer",
+  "exportedAt": "2026-10-11T15:52:58.235Z",
+  "data": {
+    "glucose": [
+      {
+        "id": "53a45248-9b63-45f1-9901-153ef57df47d",
+        "value": 398,
+        "unit": "mg/dL",
+        "timestamp": "2026-10-10T17:22:00.000Z",
+        "note": ""
+      },
+      {
+        "id": "b65298fc-a75b-4fd8-bc74-88e78cc9b67c",
+        "value": 320,
+        "unit": "mg/dL",
+        "timestamp": "2026-10-10T20:52:00.000Z",
+        "note": ""
+      },
+      {
+        "id": "e951161f-0208-4779-b2ff-244a40171b6d",
+        "updatedAt": "2026-10-11T15:10:12.459Z",
+        "value": 229,
+        "unit": "mg/dL",
+        "timestamp": "2026-10-11T15:09:00.000Z",
+        "note": ""
+      },
+      {
+        "id": "05f67e28-1752-46a4-a13a-0c75d926d106",
+        "updatedAt": "2026-10-11T15:30:19.548Z",
+        "value": 412,
+        "unit": "mg/dL",
+        "timestamp": "2026-10-11T01:29:00.000Z",
+        "note": ""
+      }
+    ],
+    "water": [
+      {
+        "id": "2debe2b2-0175-4829-a64a-26e0bce1c41a",
+        "ml": 500,
+        "timestamp": "2026-10-10T16:23:00.000Z"
+      },
+      {
+        "id": "348bec3b-4943-4348-9ea9-e35446328709",
+        "ml": 500,
+        "timestamp": "2026-10-10T20:53:00.000Z"
+      },
+      {
+        "id": "b86ffa14-10e3-4cde-9660-caabdf6771b1",
+        "updatedAt": "2026-10-10T22:26:04.549Z",
+        "ml": 500,
+        "timestamp": "2026-10-10T22:26:00.000Z"
+      },
+      {
+        "id": "cfb450c0-f62e-4dfb-bd3c-0d7a5c2f1b50",
+        "updatedAt": "2026-10-11T15:25:12.252Z",
+        "ml": 350,
+        "timestamp": "2026-10-11T15:25:00.000Z"
+      }
+    ],
+    "monitoring": [
+      {
+        "id": "f484cb52-dd6e-4cef-b4ba-636670850025",
+        "recordType": "monitoring",
+        "glucoseId": "53a45248-9b63-45f1-9901-153ef57df47d",
+        "timestamp": "2026-10-10T17:22:00.000Z",
+        "glucoseValue": 398,
+        "glucoseUnit": "mg/dL",
+        "moment": "Antes do almoço",
+        "customMoment": "",
+        "insulinStatus": "yes",
+        "insulinDose": 12,
+        "insulinType": "",
+        "mealStatus": "yes",
+        "food": "Arroz, Feijao, Linguica, carne e suo de limao",
+        "note": ""
+      },
+      {
+        "id": "7eeb708b-4698-43ed-8576-8136c500286e",
+        "recordType": "monitoring",
+        "glucoseId": "b65298fc-a75b-4fd8-bc74-88e78cc9b67c",
+        "timestamp": "2026-10-10T20:52:00.000Z",
+        "glucoseValue": 320,
+        "glucoseUnit": "mg/dL",
+        "moment": "Após o lanche",
+        "customMoment": "",
+        "insulinStatus": "yes",
+        "insulinDose": 6,
+        "insulinType": "",
+        "mealStatus": "no",
+        "food": "",
+        "note": ""
+      },
+      {
+        "id": "8423038a-3623-4a34-9bb6-ece41b3c1900",
+        "recordType": "food",
+        "glucoseId": null,
+        "timestamp": "2026-10-10T20:59:00.000Z",
+        "glucoseValue": null,
+        "glucoseUnit": "mg/dL",
+        "moment": "Outro momento",
+        "customMoment": "Refeição",
+        "insulinStatus": "unknown",
+        "insulinDose": null,
+        "insulinType": "",
+        "mealStatus": "yes",
+        "food": "Tapioca + Um pedaco de Bolo",
+        "note": "5U"
+      },
+      {
+        "id": "c8054a41-1c16-4b45-afe0-ef57a969c29a",
+        "updatedAt": "2026-10-11T15:10:12.459Z",
+        "recordType": "monitoring",
+        "glucoseId": "e951161f-0208-4779-b2ff-244a40171b6d",
+        "timestamp": "2026-10-11T15:09:00.000Z",
+        "glucoseValue": 229,
+        "glucoseUnit": "mg/dL",
+        "moment": "Antes do café da manhã",
+        "customMoment": "",
+        "insulinStatus": "yes",
+        "insulinDose": 3,
+        "insulinType": "",
+        "mealStatus": "unknown",
+        "food": "",
+        "note": ""
+      },
+      {
+        "id": "67f3b0bd-1413-47cc-97ba-75efc41a4c73",
+        "updatedAt": "2026-10-11T15:30:19.548Z",
+        "recordType": "monitoring",
+        "glucoseId": "05f67e28-1752-46a4-a13a-0c75d926d106",
+        "timestamp": "2026-10-11T01:29:00.000Z",
+        "glucoseValue": 412,
+        "glucoseUnit": "mg/dL",
+        "moment": "Após o jantar",
+        "customMoment": "",
+        "insulinStatus": "yes",
+        "insulinDose": 10,
+        "insulinType": "",
+        "mealStatus": "unknown",
+        "food": "",
+        "note": ""
+      },
+      {
+        "id": "007bb807-ef2c-464f-83fa-f0baa6bc8920",
+        "updatedAt": "2026-10-11T15:31:52.575Z",
+        "recordType": "insulin",
+        "glucoseId": null,
+        "timestamp": "2026-10-11T05:30:00.000Z",
+        "glucoseValue": null,
+        "glucoseUnit": "mg/dL",
+        "moment": "Durante a madrugada",
+        "customMoment": "",
+        "insulinStatus": "yes",
+        "insulinDose": 15,
+        "insulinType": "",
+        "mealStatus": "unknown",
+        "food": "",
+        "note": ""
+      }
+    ],
+    "settings": {
+      "period": "all",
+      "glucoseUnit": "mg/dL",
+      "reminder": {
+        "enabled": true,
+        "paused": false,
+        "intervalMinutes": 15,
+        "nextAt": 1791734114294
+      }
+    }
+  }
+}

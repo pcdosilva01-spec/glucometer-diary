@@ -1,0 +1,11 @@
+{
+  "name": "glucometer-diary",
+  "private": true,
+  "scripts": {
+    "build": "rm -rf public-site && mkdir -p public-site && cp -R index.html styles.css src manus-routes.json logo.svg app-icon-192.png app-icon-512.png soundreality-glass-filled-with-water-201638.mp3 manifest.webmanifest sw.js public-site/",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "web-push": "^3.6.7"
+  }
+}
